@@ -46,11 +46,11 @@
 
 ## 실행 링크 / 비교
 
-- **실험02 확인:** [Warm-centered preview](https://raw.githack.com/pchjesus/menu-roulette/aba45de37283991270864ec6379ba048e45d9455/index.html)
+- **실험02 확인:** [Warm-centered preview](https://raw.githack.com/pchjesus/menu-roulette/883c34c135995fa4af9eb46266c460c17c711f8d/index.html)
 - 원본: [GitHub Pages main](https://pchjesus.github.io/menu-roulette/)
 - 실험01: [Cool object-first preview](https://raw.githack.com/pchjesus/menu-roulette/1478a868278a72011161e6ec4e222eaf5af8ccb0/index.html)
 - [파일 변경 비교](https://github.com/pchjesus/menu-roulette/compare/main...experiment/design-kkakgi-v1.2-warm-centered)
-- 실험02 실행 링크는 HTML을 변경한 커밋 `aba45de37283991270864ec6379ba048e45d9455`를 고정 참조한다. GitHub Pages 정식 배포 주소가 아니라 공개 정적 프록시 미리보기다.
+- 실험02 실행 링크는 패치된 HTML을 변경한 커밋 `883c34c135995fa4af9eb46266c460c17c711f8d`를 고정 참조한다. GitHub Pages 정식 배포 주소가 아니라 공개 정적 프록시 미리보기다.
 
 ## 이번 커밋 확인 결과
 
@@ -72,3 +72,13 @@
 - 회귀 위험: 카테고리 칩 확장에 따른 패널 높이 증가, 결과 카드 생성 시 열 높이 증가, 여러 번 연속 누른 아코디언의 중첩 애니메이션.
 - 정적 점검 및 diff 확인: 패치 후 재점검.
 - `node --test`와 실제 브라우저 테스트: 별도 결과 기록 (미실행 시 NOT RUN).
+
+### Patch 1 실제 정적/모의 동작 검증 (2026-10-17)
+- **PASS** GitHub 코드 재조회: 4개 변경 파일만 존재, `main` 원본 `index.html` 및 원본 CSS SHA 유지.
+- **PASS** 실험 브랜치 HTML: 가이드 래퍼·아이콘·새 스크립트 각각 1회 등록, 메뉴 모드·1~3개·원본 앱 스크립트·접근성 메시지 유지.
+- **PASS** JS 자체 구문·클릭 전환 모의 검사 7/7: 열기/닫기 시작 및 완료, 동작 축소 on/off 동작.
+- **PASS** 빠른 연속 클릭 모의 검사: 진행 중인 애니메이션 취소, 역방향 재개, 종료 후 상태 복구.
+- **PASS** CSS 괄호 균형 및 861px 이상 2열 stretch / 860px 이하 모바일 분기 정적 검사.
+- **NOT RUN** Node `node --test` 실제 실행(컨테이너에서 GitHub 도메인 DNS 해석 실패로 저장소 clone 불가).
+- **NOT RUN** 브라우저 실제 렌더링·높이 픽셀 일치·외부 미리보기 응답·실기기/스크린리더 검사. 모의 검사와 정적 검사를 실제 브라우저 검증으로 취급하지 않는다.
+- **주의**: `raw.githack.com`은 외부 공개 미리보기이며 공식 GitHub Pages가 아니다. PR/merge는 사용자 승인 전까지 진행하지 않는다.
