@@ -1,7 +1,7 @@
-import {categoriesFor,icons} from './data/menus.js?v=0.1.2';
-import {getPool,draw} from './logic/recommend.js?v=0.1.2';
-import {loadSettings,saveSettings} from './state/storage.js?v=0.1.2';
-import {showPreview,animateSlots} from './ui/slots.js?v=0.1.2';
+import {categoriesFor,icons} from './data/menus.js?v=0.1.4';
+import {getPool,draw} from './logic/recommend.js?v=0.1.4';
+import {loadSettings,saveSettings} from './state/storage.js?v=0.1.4';
+import {showPreview,animateSlots} from './ui/slots.js?v=0.1.4';
 const $=s=>document.querySelector(s);let storage;try{storage=window.localStorage;}catch{}
 const state=loadSettings(storage);let spinning=false;let results=[];
 const labels={lunch:['오늘 점심,','뭐 먹지?','고민은 짧게, 한 끼는 맛있게. 오늘의 메뉴를 뽑아 봐.'],dinner:['오늘 저녁,','뭐 먹지?','하루의 끝, 맛있는 선택. 오늘 저녁은 운에 맡겨 봐.'],cafe:['잠깐 쉬어 갈까,','카페 갈래?','커피 한 잔부터 달콤한 한 입까지. 오늘의 취향을 뽑아 봐.']};
@@ -22,7 +22,17 @@ function render(){
 }
 function changed(){clearResults();$('#stage-label').textContent='오늘의 맛있는 우연';$('#stage-caption').textContent='한 번의 우연이, 맛있는 하루가 되도록.';render();if(!saveSettings(storage,state))message('설정을 저장할 수 없지만 메뉴 추천은 이용할 수 있어요.');}
 function lock(value){spinning=value;document.querySelectorAll('main button, #reduce-motion').forEach(b=>b.disabled=value);$('#machine').setAttribute('aria-busy',String(value));}
-function addResult(menu,index){results[index]=menu;$('#result-section').hidden=false;$('#results').style.setProperty('--count',state.count);const card=document.createElement('article');card.className='result-card';const icon=document.createElement('span');icon.className='food-icon';icon.textContent=icons[menu.category];const content=document.createElement('div');const category=document.createElement('small');category.textContent=menu.category;const name=document.createElement('h3');name.textContent=menu.name;const n=document.createElement('span');n.className='result-number';n.textContent=String(index+1).padStart(2,'0');content.append(category,name);card.append(icon,content,n);$('#results').append(card);}
+function prepareResults(){
+ $('#results').style.setProperty('--count',state.count);
+ for(let i=0;i<state.count;i++){const placeholder=document.createElement('div');placeholder.className='slot-placeholder';placeholder.setAttribute('aria-hidden','true');$('#results').append(placeholder);}
+}
+function addResult(menu,index){
+ results[index]=menu;$('#result-section').hidden=false;
+ const card=document.createElement('article');card.className='result-card slot-bubble';card.dataset.slot=String(index+1);
+ const number=document.createElement('small');number.textContent=`${String(index+1).padStart(2,'0')} · ${menu.category}`;
+ const name=document.createElement('h3');name.textContent=menu.name;card.append(number,name);
+ $('#results').children[index].replaceWith(card);
+}
 document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>{if(spinning)return;state.mode=b.dataset.mode;changed();}));
 document.querySelectorAll('[data-method]').forEach(b=>b.addEventListener('click',()=>{if(spinning)return;state.method=b.dataset.method;changed();}));
 document.querySelectorAll('button[data-count]').forEach(b=>b.addEventListener('click',()=>{if(spinning)return;state.count=+b.dataset.count;changed();}));
@@ -30,9 +40,9 @@ $('#categories').addEventListener('click',e=>{const b=e.target.closest('[data-ca
 $('#reduce-motion').addEventListener('change',e=>{if(spinning)return;state.reduceMotion=e.target.checked;if(!saveSettings(storage,state))message('설정을 저장할 수 없지만 메뉴 추천은 이용할 수 있어요.');});
 $('#spin').addEventListener('click',async()=>{
  if(spinning)return;const pool=getPool(state);if(state.method==='category'&&!state.categoriesByMode[state.mode].length){message('카테고리를 1~3개 선택해 주세요.');return;}
- try{const rounds=draw(pool,state.count);clearResults();lock(true);message('맛있는 메뉴를 고르는 중이에요…');$('#stage-label').textContent='오늘의 메뉴를 고르는 중';
+ try{const rounds=draw(pool,state.count);clearResults();prepareResults();lock(true);message('맛있는 메뉴를 고르는 중이에요…');$('#stage-label').textContent='오늘의 메뉴를 고르는 중';
  await animateSlots($('#reels'),$('#machine'),rounds,state.reduceMotion||window.matchMedia('(prefers-reduced-motion: reduce)').matches,addResult);
- message('메뉴가 나왔어요! 마음에 들면 오늘은 이걸로.');$('#stage-label').textContent='맛있는 선택이 도착했어요';$('#stage-caption').textContent=results.map(m=>m.name).join(' · ');
+ message('메뉴가 나왔어요! 마음에 들면 오늘은 이걸로.');$('#stage-label').textContent='맛있는 선택이 도착했어요';$('#stage-caption').textContent='마음 가는 메뉴로 골라 봐. 다시 뽑아도 좋아.';
  }catch(error){message(error instanceof Error?error.message:'다시 시도해 주세요.');}finally{lock(false);$('#spin').replaceChildren(document.createTextNode('다시 뽑기'));const arrow=document.createElement('span');arrow.textContent='↻';$('#spin').append(arrow);}
 });
 render();
