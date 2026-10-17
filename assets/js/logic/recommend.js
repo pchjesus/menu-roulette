@@ -1,4 +1,4 @@
-import {foodMenus,cafeMenus,categoriesFor} from '../data/menus.js?v=0.1.7';
+import {foodMenus,cafeMenus,categoriesFor} from '../data/menus.js?v=0.1.8';
 export function getPool(settings) {
  const source=settings.mode==='cafe'?cafeMenus:foodMenus.filter(m=>m.mealModes.includes(settings.mode));
  return [...new Map(source.filter(m=>settings.method==='all'||settings.categoriesByMode[settings.mode].includes(m.category)).map(m=>[m.id,m])).values()];

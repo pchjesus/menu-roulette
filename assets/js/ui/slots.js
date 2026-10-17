@@ -1,4 +1,4 @@
-import {icons} from '../data/menus.js?v=0.1.7';
+import {icons} from '../data/menus.js?v=0.1.8';
 export const SLOT_HEIGHT=74;
 export const SLOT_OFFSET=21;
 const OFFSET=SLOT_OFFSET;
