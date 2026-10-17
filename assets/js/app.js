@@ -20,7 +20,7 @@ function render(){
  message(empty?'카테고리를 1~3개 선택해 주세요.':pool.length<state.count?`후보가 ${pool.length}개예요. 추천 개수를 줄여 주세요.`:'');
  $('#reduce-motion').checked=state.reduceMotion;showPreview($('#reels'),pool,state.count);
 }
-function changed(){clearResults();render();if(!saveSettings(storage,state))message('설정을 저장할 수 없지만 메뉴 추천은 이용할 수 있어요.');}
+function changed(){clearResults();$('#stage-label').textContent='오늘의 맛있는 우연';$('#stage-caption').textContent='한 번의 우연이, 맛있는 하루가 되도록.';render();if(!saveSettings(storage,state))message('설정을 저장할 수 없지만 메뉴 추천은 이용할 수 있어요.');}
 function lock(value){spinning=value;document.querySelectorAll('main button, #reduce-motion').forEach(b=>b.disabled=value);$('#machine').setAttribute('aria-busy',String(value));}
 function addResult(menu,index){results[index]=menu;$('#result-section').hidden=false;$('#results').style.setProperty('--count',state.count);const card=document.createElement('article');card.className='result-card';const icon=document.createElement('span');icon.className='food-icon';icon.textContent=icons[menu.category];const content=document.createElement('div');const category=document.createElement('small');category.textContent=menu.category;const name=document.createElement('h3');name.textContent=menu.name;const n=document.createElement('span');n.className='result-number';n.textContent=String(index+1).padStart(2,'0');content.append(category,name);card.append(icon,content,n);$('#results').append(card);}
 document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>{if(spinning)return;state.mode=b.dataset.mode;changed();}));
