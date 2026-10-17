@@ -43,3 +43,18 @@
 - [v1.2 Universal Design 지침](https://github.com/pchjesus/design-kkakgi/blob/main/guidelines/universal/drafts/Universal_Visual_Design_UI_UX_Guidelines_v1.2.md)
 - [Preference Atlas v0.3](https://github.com/pchjesus/design-kkakgi/blob/main/references/PREFERENCE_ATLAS_v0.3_20261016.md)
 - 이번 채팅의 색채 조화·중앙 배치·비율 보존에 관한 사용자 피드백
+
+## 실행 링크 / 비교
+
+- **실험02 확인:** [Warm-centered preview](https://raw.githack.com/pchjesus/menu-roulette/aba45de37283991270864ec6379ba048e45d9455/index.html)
+- 원본: [GitHub Pages main](https://pchjesus.github.io/menu-roulette/)
+- 실험01: [Cool object-first preview](https://raw.githack.com/pchjesus/menu-roulette/1478a868278a72011161e6ec4e222eaf5af8ccb0/index.html)
+- [파일 변경 비교](https://github.com/pchjesus/menu-roulette/compare/main...experiment/design-kkakgi-v1.2-warm-centered)
+- 실험02 실행 링크는 HTML을 변경한 커밋 `aba45de37283991270864ec6379ba048e45d9455`를 고정 참조한다. GitHub Pages 정식 배포 주소가 아니라 공개 정적 프록시 미리보기다.
+
+## 이번 커밋 확인 결과
+
+- PASS: main 기준 3개 파일만 변경 (원본 CSS·JS·메뉴 데이터 그대로).
+- PASS: 브랜치 index에 새로운 CSS 링크 1개가 포함되며 전체 모드·카탈로그 마크업을 유지함 (정적 검사).
+- PASS: CSS 괄호 균형 및 따뜻한 기본 토큰·1000px 최대폭 선언 (정적 검사).
+- NOT RUN: `node --test` 재실행, 외부 프록시 접속, 실기기/브라우저 렌더링, 200% 확대 및 스크린리더.
