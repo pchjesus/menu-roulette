@@ -1,4 +1,4 @@
-import {icons} from '../data/menus.js?v=0.1.5';
+import {icons} from '../data/menus.js?v=0.1.6';
 export const SLOT_HEIGHT=74;
 export const SLOT_OFFSET=21;
 const OFFSET=SLOT_OFFSET;
@@ -18,9 +18,9 @@ export function showPreview(container,_pool,count){
  for(let i=0;i<count;i++)container.append(createReel([]));
 }
 export function buildSequence(round,reduced=false){
- const candidates=round.candidates;
- if(reduced)return {menus:[candidates[0],round.winner,candidates.at(-1)],winnerIndex:1};
- const menus=[...candidates,...candidates,...candidates,...candidates,...candidates,round.winner,candidates[0]];
+ const displayMenus=round.displayMenus;
+ if(reduced)return {menus:[displayMenus[0],round.winner,displayMenus.at(-1)],winnerIndex:1};
+ const menus=[...displayMenus,...displayMenus,...displayMenus,...displayMenus,...displayMenus,round.winner,displayMenus[0]];
  return {menus,winnerIndex:menus.length-2};
 }
 export async function animateSlots(container,machine,rounds,reduced,onStop){

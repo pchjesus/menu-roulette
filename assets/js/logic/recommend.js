@@ -1,4 +1,4 @@
-import {foodMenus,cafeMenus,categoriesFor} from '../data/menus.js?v=0.1.5';
+import {foodMenus,cafeMenus,categoriesFor} from '../data/menus.js?v=0.1.6';
 export function getPool(settings) {
  const source=settings.mode==='cafe'?cafeMenus:foodMenus.filter(m=>m.mealModes.includes(settings.mode));
  return [...new Map(source.filter(m=>settings.method==='all'||settings.categoriesByMode[settings.mode].includes(m.category)).map(m=>[m.id,m])).values()];
@@ -9,12 +9,19 @@ export function sample(items,count,rng=Math.random){
  for(let i=0;i<count;i++){const r=rng();if(r<0||r>=1||!Number.isFinite(r))throw new RangeError('잘못된 난수');const j=i+Math.floor(r*(copy.length-i));[copy[i],copy[j]]=[copy[j],copy[i]];}
  return copy.slice(0,count);
 }
-export function draw(pool,count,rng=Math.random){
+export function draw(pool,count,rng=Math.random,displayRng=Math.random){
  if(!Number.isInteger(count)||count<1||count>3)throw new RangeError('추천 개수는 1~3개예요.');
  if(pool.length<count)throw new RangeError(`후보가 ${pool.length}개예요. 추천 개수를 줄여 주세요.`);
- let remaining=[...pool];const rounds=[];
- for(let i=0;i<count;i++){const candidates=sample(remaining,Math.min(8,remaining.length),rng);const winner=sample(candidates,1,rng)[0];rounds.push({candidates,winner});remaining=remaining.filter(m=>m.id!==winner.id);}
- return rounds;
+ // The only winning draw: sample directly from the ENTIRE eligible menu pool.
+ // No display list exists when the winners are selected.
+ const winners=sample(pool,count,rng);
+ return winners.map(winner=>{
+  // Cosmetic reel contents are assembled AFTER the complete winning draw.
+  // A separate random source prevents visuals from affecting results.
+  const others=sample(pool.filter(menu=>menu.id!==winner.id),Math.min(7,pool.length-1),displayRng);
+  const displayMenus=sample([...others,winner],others.length+1,displayRng);
+  return {winner,displayMenus};
+ });
 }
 export const defaults=()=>({mode:'lunch',method:'all',count:1,categoriesByMode:{lunch:[],dinner:[],cafe:[]},reduceMotion:false});
 export function sanitize(raw){
