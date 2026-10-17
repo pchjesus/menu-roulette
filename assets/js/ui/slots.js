@@ -1,4 +1,4 @@
-import {icons} from '../data/menus.js';
+import {icons} from '../data/menus.js?v=0.1.2';
 const HEIGHT=74, OFFSET=20;
 function item(menu){const row=document.createElement('div');row.className='reel-item';const icon=document.createElement('span');icon.className='food-icon';icon.textContent=icons[menu.category]||'🍽️';const name=document.createElement('span');name.textContent=menu.name;row.append(icon,name);return row;}
 export function createReel(menus){const reel=document.createElement('div');reel.className='reel';reel.setAttribute('aria-hidden','true');const track=document.createElement('div');track.className='reel-track';menus.forEach(m=>track.append(item(m)));reel.append(track);return reel;}

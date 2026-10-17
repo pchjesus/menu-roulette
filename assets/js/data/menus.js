@@ -15,7 +15,10 @@ const cafes = {
 '논커피':['초콜릿 라테','딸기 라테','말차 라테','망고 스무디','요거트 스무디','레몬 에이드','밀크티','자몽 에이드'],
 '디저트':['치즈케이크','티라미수','브라우니','마카롱','푸딩','크로플','바스크 치즈케이크','딸기 쇼트케이크'],
 '베이커리':['크루아상','소금빵','베이글','스콘','시나몬 롤','뺑 오 쇼콜라','마들렌','휘낭시에']};
-export const foodMenus = Object.entries(foods).flatMap(([category,names],c)=>names.map((name,i)=>({id:`food-${c}-${i}`,name,category,mealModes:i===10?['dinner']:i===0?['lunch']:['lunch','dinner']})));
+// 식사 태그는 영양·건강 판단이 아닌 1차 편집 기준. 가벼운 브런치는 점심, 공유 요리는 저녁에 우선 배치.
+const lunchOnly = new Set(['오믈렛','베이글 샌드위치','반미']);
+const dinnerOnly = new Set(['보쌈','닭갈비','양장피','유산슬','오코노미야키','샤브샤브','스테이크','감바스','양꼬치','훠궈','똠얌꿍','양념치킨']);
+export const foodMenus = Object.entries(foods).flatMap(([category,names],c)=>names.map((name,i)=>({id:`food-${c}-${i}`,name,category,mealModes:dinnerOnly.has(name)?['dinner']:lunchOnly.has(name)?['lunch']:['lunch','dinner']})));
 export const cafeMenus = Object.entries(cafes).flatMap(([category,names],c)=>names.map((name,i)=>({id:`cafe-${c}-${i}`,name,category})));
 export const categoriesFor = mode => mode==='cafe'?cafeCategories:foodCategories;
 export const icons = {'한식':'🍚','중식':'🥟','일식':'🍣','양식':'🍝','분식':'🍜','동남아':'🍲','패스트푸드':'🍔','기타':'🥙','커피':'☕','차·티':'🍵','논커피':'🥤','디저트':'🍰','베이커리':'🥐'};
