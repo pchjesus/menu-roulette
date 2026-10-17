@@ -1,4 +1,4 @@
-import {icons} from '../data/menus.js?v=0.1.6';
+import {icons} from '../data/menus.js?v=0.1.7';
 export const SLOT_HEIGHT=74;
 export const SLOT_OFFSET=21;
 const OFFSET=SLOT_OFFSET;
@@ -37,7 +37,8 @@ export async function animateSlots(container,machine,rounds,reduced,onStop){
   // All reels start together. Commit stops and bubbles strictly from left to right.
   for(let index=0;index<runs.length;index++){
    const run=runs[index];if(run.animation)await run.animation.finished;
-   run.track.style.transform=`translateY(${run.end}px)`;run.animation?.cancel();run.reel.classList.add('is-stopped');
+   // Discard the animation strip completely: a settled reel owns one menu only.
+   run.animation?.cancel();run.track.replaceChildren(item(rounds[index].winner));run.track.style.transform='none';run.reel.classList.add('is-stopped');
    onStop(rounds[index].winner,index);container.setAttribute('aria-label',rounds.slice(0,index+1).map(r=>r.winner.name).join(', '));
   }
  }finally{runs.forEach(run=>run.animation?.cancel());machine.classList.remove('is-spinning');}
