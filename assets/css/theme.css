@@ -1,0 +1,386 @@
+/* 뭐먹지? v0.1.5 — approved warm-centered theme. Loaded after the original baseline CSS. Preserve menu and slot logic. */
+:root {
+  --paper: #f7f3ea;
+  --ink: #242424;
+  --orange: #f47736;
+  --line: #ded9cf;
+  --muted: #625d55;
+}
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Pretendard, "Apple SD Gothic Neo", "Noto Sans KR", system-ui, sans-serif;
+}
+/* A narrower, centrally anchored composition without centering all labels. */
+.shell {
+  width: 100%;
+  max-width: 1000px;
+  padding-inline: 26px;
+  margin-inline: auto;
+}
+header {
+  padding-block: 23px 21px;
+}
+.brand {
+  font-size: 29px;
+  font-weight: 850;
+  letter-spacing: -1.4px;
+}
+.brand i {
+  font-size: 10px;
+}
+.guide-link { font-size: 13px; }
+main { padding-top: 24px; }
+.modes {
+  width: min(100%, 340px);
+  margin-inline: auto;
+  border-radius: 13px;
+  padding: 4px;
+  background: #ebe3d6;
+}
+.modes button {
+  min-height: 46px;
+  border-radius: 10px;
+}
+.modes button span { font-size: 14px; }
+/* Center this small application's main narrative, but not form text. */
+.hero {
+  margin: 26px auto 30px;
+  max-width: 620px;
+  text-align: center;
+}
+.hero .eyebrow { display: none; }
+h1 {
+  font-size: clamp(33px, 4vw, 45px);
+  font-weight: 810;
+  letter-spacing: -1.65px;
+  line-height: 1.24;
+  margin-bottom: 9px;
+}
+h1 span::after {
+  height: 7px;
+  bottom: 1px;
+  background: #f477363b;
+}
+.hero > p:last-child {
+  font-size: 14px;
+  line-height: 1.6;
+}
+.play-layout {
+  width: 100%;
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(315px, .82fr);
+  gap: clamp(20px, 2.8vw, 28px);
+  align-items: start;
+}
+/* Restore warmth to the stage. Preserve the tactile machine as focal object. */
+.stage {
+  min-height: 475px;
+  padding: 23px 22px 27px;
+  background-color: #eee7da;
+  background-image:
+    radial-gradient(#cfc4b4 0.75px, transparent 1px),
+    radial-gradient(ellipse at 50% 26%, #faf3e8 0%, #f1e8da 55%, #e9dfd0 100%);
+  background-size: 17px 17px, auto;
+  border-color: #e2d7c8;
+  border-radius: 20px;
+  box-shadow: inset 0 1px 0 #fff9f0, 0 11px 24px #7053380a;
+}
+.stage-note {
+  color: #625748;
+  font-size: 12px;
+  font-weight: 640;
+}
+.status-dot {
+  width: 7px;
+  height: 7px;
+}
+.edition, .stage-decoration, .stage-caption { display: none; }
+.machine-wrap {
+  width: min(84%, 390px);
+  margin: 49px auto 31px;
+}
+.machine {
+  border-radius: 25px 25px 18px 18px;
+  border-color: #af4c22;
+  background: linear-gradient(143deg, #ffa56a 0%, #f68543 23%, #f47736 61%, #e9692b 100%);
+  box-shadow: inset 2px 3px 0 #ffffff47, inset -4px -6px 8px #9f411d20,
+    0 7px 0 #ce5926, 0 12px 0 #242424, 0 25px 32px #6d4c2425;
+}
+.machine-top { display: none; }
+.marquee {
+  border-radius: 10px;
+  border-color: #87390f;
+  box-shadow: inset 0 0 0 2px #40372d;
+}
+.marquee strong {
+  font-size: 22px;
+  font-weight: 760;
+  letter-spacing: -.2px;
+}
+.marquee > span { font-size: 15px; }
+.reel-frame {
+  border-radius: 11px;
+}
+.reel { border-radius: 7px; }
+.reel-item {
+  font-weight: 750;
+}
+.machine-bottom {
+  padding: 11px 5px 2px;
+}
+.machine-bottom > span { display: none; }
+.coin-slot { opacity: .72; }
+.lever-ball {
+  background: radial-gradient(circle at 32% 25%, #ffe5c2, #ffbb84 20%, #f47736 67%, #bb4b16);
+}
+.settings {
+  min-width: 0;
+  padding: 7px 0 16px;
+  border: none;
+  background: transparent;
+  border-radius: 0;
+}
+.panel-head {
+  padding-bottom: 17px;
+  margin-bottom: 19px;
+}
+.panel-head .eyebrow { display: none; }
+h2 {
+  font-size: 24px;
+  font-weight: 780;
+  letter-spacing: -.8px;
+}
+fieldset { margin-bottom: 22px; }
+legend {
+  font-size: 14px;
+  font-weight: 730;
+}
+legend small, .category-heading {
+  font-size: 12px;
+  line-height: 1.5;
+}
+.step { font-size: 12px; }
+.method-options button {
+  min-height: 112px;
+  border-color: #d9cbbb;
+  border-radius: 11px;
+  background: #fffdf8;
+  padding: 14px 12px;
+}
+.method-options button[aria-pressed=true] {
+  border-color: #ca602d;
+  background: #fff0e4;
+  box-shadow: inset 0 0 0 1px #ca602d;
+}
+.method-options strong { font-size: 14px; }
+.method-options small {
+  font-size: 12px;
+  line-height: 1.4;
+}
+.counts button {
+  min-height: 50px;
+  border-radius: 10px;
+  border-color: #d9cbbb;
+  background: #fffdf8;
+}
+.counts button span { font-size: 12px; }
+.chips button {
+  min-height: 44px;
+  border-color: #d9cbbb;
+  background: #fffdf8;
+  font-size: 13px;
+}
+.catalog-open {
+  min-height: 48px;
+  border-color: #d9cbbb;
+  background: #fffdf8;
+  border-radius: 10px;
+  font-size: 14px;
+}
+.catalog-open small { font-size: 12px; }
+.pool-line { font-size: 12px; }
+.pool-line > span:last-child { display: none; }
+.spin-button {
+  min-height: 58px;
+  border-radius: 10px;
+  background: #f47736;
+  color: #242424;
+  font-size: 17px;
+  font-weight: 830;
+}
+.spin-button:hover:enabled { background: #ff8a4e; }
+.message {
+  font-size: 12px;
+  line-height: 1.6;
+}
+.motion {
+  font-size: 13px;
+  gap: 8px;
+}
+.motion input {
+  width: 18px;
+  height: 18px;
+}
+/* Softer result surface, without sacrificing the high-contrast menu name. */
+.slot-bubbles .slot-bubble {
+  background: #fffdf8;
+  border: 1px solid #bfb09f;
+  border-radius: 14px;
+  box-shadow: 0 5px 12px #5d403022;
+}
+.slot-bubble:before {
+  background: #fffdf8;
+  border-color: #bfb09f;
+  border-width: 1px;
+}
+.slot-bubbles .slot-bubble small {
+  font-size: 12px;
+  color: #8a3916;
+}
+.slot-bubbles .slot-bubble h3 {
+  font-weight: 790;
+  letter-spacing: -.8px;
+}
+/* Improve discovery without reshaping the dialog or touching its state logic. */
+.menu-dialog {
+  background: #fffdf8;
+  border-color: #d1c7b9;
+}
+.catalog-header .eyebrow { display: none; }
+.catalog-description, .catalog-empty p { font-size: 14px; }
+.catalog-search-wrap input { font-size: 14px; }
+.catalog-scopes small { font-size: 11px; }
+.catalog-views button { font-size: 13px; }
+.catalog-menu-list small { font-size: 12px; }
+.catalog-filter-row select, .catalog-filter-row p { font-size: 12px; }
+details { font-size: 13px; }
+details p { font-size: 14px; }
+footer p { font-size: 12px; }
+footer > span:last-child { font-size: 10px; }
+/* Switch before controls become cramped; still center both rows on phones. */
+@media (max-width: 860px) {
+  .shell { padding-inline: 20px; }
+  .play-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 19px;
+    max-width: 560px;
+  }
+  .stage {
+    width: 100%;
+    min-height: 416px;
+    padding: 19px 19px 24px;
+  }
+  .machine-wrap {
+    width: min(81%, 340px);
+    margin: 37px auto 23px;
+  }
+  .settings {
+    width: 100%;
+    max-width: 560px;
+    margin-inline: auto;
+    padding: 5px 1px 20px;
+  }
+  .hero {
+    margin: 24px auto 26px;
+  }
+  .slot-result-section {
+    margin-top: 26px;
+  }
+}
+@media (max-width: 480px) {
+  .shell { padding-inline: 18px; }
+  header { padding-block: 19px; }
+  .brand { font-size: 26px; }
+  .brand i { font-size: 9px; }
+  .hero { margin: 22px auto 25px; }
+  h1 { font-size: clamp(31px, 8.6vw, 38px); }
+  .hero > p:last-child { font-size: 13px; }
+  .stage {
+    min-height: 395px;
+    padding: 18px 16px 22px;
+  }
+  .machine-wrap {
+    width: min(79%, 320px);
+    margin: 33px auto 22px;
+  }
+  .method-options button { min-height: 103px; }
+  .slot-bubbles .slot-bubble h3 { font-size: 21px; }
+  .catalog-description { font-size: 13px; }
+}
+@media (max-width: 360px) {
+  .shell { padding-inline: 14px; }
+  .stage { padding-inline: 12px; }
+  .machine-wrap { width: 80%; }
+  .machine { padding: 12px 10px; }
+  .marquee strong { font-size: 19px; }
+  .slot-bubbles .slot-bubble small { font-size: 11px; }
+  .slot-bubbles .slot-bubble h3 { font-size: 19px; }
+}
+
+/* v0.1.5 finishing: align the primary action to the slot panel's lower edge.
+   Keep readable labels left-aligned and the 1.3:.82 column proportion. */
+@media (min-width: 861px) {
+  .play-layout {
+    align-items: stretch;
+  }
+  .stage {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .stage > .machine-wrap {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  .settings {
+    min-height: 475px;
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    padding-bottom: 0;
+  }
+  .settings > .panel-head,
+  .settings > .catalog-open,
+  .settings > fieldset,
+  .settings > .pool-line,
+  .settings > .message,
+  .settings > .motion,
+  .settings > .spin-button {
+    flex-shrink: 0;
+  }
+  .settings > .spin-button {
+    margin-top: auto;
+  }
+}
+/* Keep the native details/summary control; animate only its content area. */
+#guide .guide-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex: none;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1;
+  transform: rotate(0deg);
+  transform-origin: center;
+  transition: transform 300ms cubic-bezier(.2,.8,.2,1);
+}
+#guide[open]:not(.guide-collapsing) .guide-toggle {
+  transform: rotate(45deg);
+}
+#guide .guide-content {
+  overflow: hidden;
+}
+#guide .guide-inner {
+  padding: 8px 0 12px;
+}
+#guide .guide-inner p:last-child {
+  margin-bottom: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  #guide .guide-toggle { transition: none; }
+}

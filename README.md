@@ -1,4 +1,4 @@
-# 뭐먹지? — Menu Roulette v0.1.4
+# 뭐먹지? — Menu Roulette v0.1.5
 
 점심·저녁·카페 메뉴를 골라 주는 가벼운 슬롯머신 웹앱.
 
@@ -23,13 +23,14 @@ GitHub Pages는 main 브랜치의 /(root)에서 배포합니다. 상대 경로�
 
 ## 구조
 
-- index.html / assets/css/styles.css: 화면과 반응형 스타일
+- index.html / assets/css/styles.css / assets/css/theme.css: 기본 화면과 최종 Warm-centered 테마
 - assets/js/data/catalog.js: 630개 대표 메뉴 원본
 - assets/js/data/menus.js: 메뉴 ID·카테고리·식사 모드 구성
 - assets/js/logic/recommend.js: 후보 필터·추첨·설정 검증
 - assets/js/state/storage.js: 버전별 설정 저장·복원
 - assets/js/ui/slots.js: 슬롯 표시·손잡이·순차 정지
 - assets/js/app.js: UI와 실행 상태
+- assets/js/ui/guide.js: 사용법 펼침·접힘 및 +→× 모션
 - tests/recommend.test.mjs: 데이터·로직·저장 경계 검증
 
 ## 추첨 원리
@@ -57,3 +58,12 @@ v0.3: 가격·맵기·카페 필터. v1.0: 기기별 사용성·접근성 안정
 설정 패널의 **메뉴 목록 보기**를 누르면 현재 추천 모드에 해당하는 목록이 열립니다. 팝업의 **전체**를 누르면 음식/카페 630개 전체를 볼 수 있고, 점메추/저메추/카페 범위를 별도로 선택할 수 있습니다. **전체 목록/카테고리별/가나다순** 보기, 카테고리 선택, 메뉴명·카테고리 검색과 검색 지우기를 지원합니다. 목록 안의 필터는 추첨 설정을 바꾸지 않습니다. 닫기/ESC/바깥 클릭으로 닫으면 원래 버튼에 포커스가 돌아옵니다.
 
 목록 UI는 `assets/js/ui/catalog.js`, 검색·분류·정렬 순수 로직은 `assets/js/logic/browse.js`에 분리했습니다.
+
+
+## v0.1.5 · 디자인 깎기 SIDE-001 적용
+
+- 아이보리·오렌지·차콜의 색온도를 보존하고, 콘텐츠를 최대 1000px 중앙으로 배치한다.
+- 슬롯 영역과 설정 패널의 상대 비율은 유지하고 데스크톱에서 하단을 정렬한다.
+- 사용법 토글은 `details`로 유지하고 +→× 회전, 열림·닫힘 슬라이드 및 동작 축소를 지원한다.
+- 이 앱의 실행 원본은 **이 저장소의 `main` 하나**다. 별도 실험 배포는 현행 제품이 아니다.
+- 디자인 피드백·교훈·실험 실패를 [디자인 깎기 SIDE-001](https://github.com/pchjesus/design-kkakgi/tree/main/cases/menu-roulette)에서 기록한다.
