@@ -1,7 +1,7 @@
-import {categoriesFor,icons} from './data/menus.js?v=0.1.4';
-import {getPool,draw} from './logic/recommend.js?v=0.1.4';
-import {loadSettings,saveSettings} from './state/storage.js?v=0.1.4';
-import {showPreview,animateSlots} from './ui/slots.js?v=0.1.4';
+import {categoriesFor,icons} from './data/menus.js?v=0.1.5';
+import {getPool,draw} from './logic/recommend.js?v=0.1.5';
+import {loadSettings,saveSettings} from './state/storage.js?v=0.1.5';
+import {showPreview,animateSlots} from './ui/slots.js?v=0.1.5';
 const $=s=>document.querySelector(s);let storage;try{storage=window.localStorage;}catch{}
 const state=loadSettings(storage);let spinning=false;let results=[];
 const labels={lunch:['오늘 점심,','뭐 먹지?','고민은 짧게, 한 끼는 맛있게. 오늘의 메뉴를 뽑아 봐.'],dinner:['오늘 저녁,','뭐 먹지?','하루의 끝, 맛있는 선택. 오늘 저녁은 운에 맡겨 봐.'],cafe:['잠깐 쉬어 갈까,','카페 갈래?','커피 한 잔부터 달콤한 한 입까지. 오늘의 취향을 뽑아 봐.']};
@@ -23,6 +23,7 @@ function render(){
 function changed(){clearResults();$('#stage-label').textContent='오늘의 맛있는 우연';$('#stage-caption').textContent='한 번의 우연이, 맛있는 하루가 되도록.';render();if(!saveSettings(storage,state))message('설정을 저장할 수 없지만 메뉴 추천은 이용할 수 있어요.');}
 function lock(value){spinning=value;document.querySelectorAll('main button, #reduce-motion').forEach(b=>b.disabled=value);$('#machine').setAttribute('aria-busy',String(value));}
 function prepareResults(){
+ $('#result-section').hidden=false;
  $('#results').style.setProperty('--count',state.count);
  for(let i=0;i<state.count;i++){const placeholder=document.createElement('div');placeholder.className='slot-placeholder';placeholder.setAttribute('aria-hidden','true');$('#results').append(placeholder);}
 }
@@ -41,7 +42,9 @@ $('#reduce-motion').addEventListener('change',e=>{if(spinning)return;state.reduc
 $('#spin').addEventListener('click',async()=>{
  if(spinning)return;const pool=getPool(state);if(state.method==='category'&&!state.categoriesByMode[state.mode].length){message('카테고리를 1~3개 선택해 주세요.');return;}
  try{const rounds=draw(pool,state.count);clearResults();prepareResults();lock(true);message('맛있는 메뉴를 고르는 중이에요…');$('#stage-label').textContent='오늘의 메뉴를 고르는 중';
- await animateSlots($('#reels'),$('#machine'),rounds,state.reduceMotion||window.matchMedia('(prefers-reduced-motion: reduce)').matches,addResult);
+ const reduced=state.reduceMotion||window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ if(window.matchMedia('(max-width: 760px)').matches)$('.stage').scrollIntoView({behavior:reduced?'auto':'smooth',block:'start'});
+ await animateSlots($('#reels'),$('#machine'),rounds,reduced,addResult);
  message('메뉴가 나왔어요! 마음에 들면 오늘은 이걸로.');$('#stage-label').textContent='맛있는 선택이 도착했어요';$('#stage-caption').textContent='마음 가는 메뉴로 골라 봐. 다시 뽑아도 좋아.';
  }catch(error){message(error instanceof Error?error.message:'다시 시도해 주세요.');}finally{lock(false);$('#spin').replaceChildren(document.createTextNode('다시 뽑기'));const arrow=document.createElement('span');arrow.textContent='↻';$('#spin').append(arrow);}
 });

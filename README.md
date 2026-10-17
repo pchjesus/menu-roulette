@@ -6,7 +6,7 @@
 - 저장소: https://github.com/pchjesus/menu-roulette
 - 추천 개수: 1~3개. 처음에는 빈칸으로 시작하고, 손잡이가 움직인 뒤 감속하며 왼쪽부터 멈춥니다. 메뉴명은 각 칸 아래 큰 말풍선에 나타납니다.
 - 완전 랜덤 또는 최대 3개 카테고리의 합집합에서 메뉴별 균등 추첨.
-- 음식 463개(점심 428 / 저녁 458), 카페 170개. 한 회차 중복 없음.
+- 음식 460개(점심 425 / 저녁 455), 카페 170개. 한 회차 중복 없음.
 - 설정만 브라우저에 저장. 로그인·서버·API·추적·외부 런타임 의존성 없음.
 - 키보드, 결과 알림, 시스템/사용자 동작 축소 지원.
 
@@ -24,7 +24,7 @@ GitHub Pages는 main 브랜치의 /(root)에서 배포합니다. 상대 경로�
 ## 구조
 
 - index.html / assets/css/styles.css: 화면과 반응형 스타일
-- assets/js/data/catalog.js: 633개 대표 메뉴 원본
+- assets/js/data/catalog.js: 630개 대표 메뉴 원본
 - assets/js/data/menus.js: 메뉴 ID·카테고리·식사 모드 구성
 - assets/js/logic/recommend.js: 후보 필터·추첨·설정 검증
 - assets/js/state/storage.js: 버전별 설정 저장·복원
