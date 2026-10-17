@@ -1,4 +1,4 @@
-import {foodMenus,cafeMenus,foodCategories,cafeCategories} from '../data/menus.js?v=0.1.8';
+import {foodMenus,cafeMenus,foodCategories,cafeCategories} from '../data/menus.js?v=0.1.9';
 const collator=new Intl.Collator('ko',{numeric:true,sensitivity:'base'});
 const normalize=value=>String(value??'').normalize('NFC').replace(/\s+/g,'').toLocaleLowerCase('ko');
 export function catalogSource(scope='all'){

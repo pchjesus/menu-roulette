@@ -1,5 +1,5 @@
-import {browseMenus,catalogSource,catalogCategories,groupMenus} from '../logic/browse.js?v=0.1.8';
-import {icons} from '../data/menus.js?v=0.1.8';
+import {browseMenus,catalogSource,catalogCategories,groupMenus} from '../logic/browse.js?v=0.1.9';
+import {icons} from '../data/menus.js?v=0.1.9';
 export function setupCatalog(getCurrentMode){
  const dialog=document.querySelector('#menu-catalog');const trigger=document.querySelector('#catalog-open');
  const search=dialog.querySelector('#catalog-search'),clear=dialog.querySelector('#catalog-clear'),categorySelect=dialog.querySelector('#catalog-category');
@@ -29,6 +29,13 @@ export function setupCatalog(getCurrentMode){
  trigger.addEventListener('click',()=>{
   if(dialog.open)return;state.scope=getCurrentMode();state.query='';state.category='all';search.value='';updateCategories();render();
   previousOverflow=document.body.style.overflow;dialog.showModal();document.body.style.overflow='hidden';trigger.setAttribute('aria-expanded','true');search.focus();
+ });
+ dialog.addEventListener('keydown',event=>{
+  if(event.key!=='Tab')return;
+  const stops=[...dialog.querySelectorAll('button:not([disabled]),input:not([disabled]),select:not([disabled]),[tabindex="0"]')].filter(element=>!element.closest('[hidden]')&&element.getClientRects().length);
+  const first=stops[0],last=stops.at(-1);if(!first)return;
+  if(event.shiftKey&&(document.activeElement===first||!dialog.contains(document.activeElement))){event.preventDefault();last.focus();}
+  else if(!event.shiftKey&&(document.activeElement===last||!dialog.contains(document.activeElement))){event.preventDefault();first.focus();}
  });
  dialog.querySelector('#catalog-close').addEventListener('click',()=>dialog.close());
  dialog.addEventListener('close',()=>{document.body.style.overflow=previousOverflow;trigger.setAttribute('aria-expanded','false');if(!trigger.disabled)trigger.focus();});

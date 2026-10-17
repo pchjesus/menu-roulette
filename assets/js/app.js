@@ -1,8 +1,8 @@
-import {setupCatalog} from './ui/catalog.js?v=0.1.8';
-import {categoriesFor,icons} from './data/menus.js?v=0.1.8';
-import {getPool,draw} from './logic/recommend.js?v=0.1.8';
-import {loadSettings,saveSettings} from './state/storage.js?v=0.1.8';
-import {showPreview,animateSlots} from './ui/slots.js?v=0.1.8';
+import {setupCatalog} from './ui/catalog.js?v=0.1.9';
+import {categoriesFor,icons} from './data/menus.js?v=0.1.9';
+import {getPool,draw} from './logic/recommend.js?v=0.1.9';
+import {loadSettings,saveSettings} from './state/storage.js?v=0.1.9';
+import {showPreview,animateSlots} from './ui/slots.js?v=0.1.9';
 const $=s=>document.querySelector(s);let storage;try{storage=window.localStorage;}catch{}
 const state=loadSettings(storage);let spinning=false;let results=[];
 const labels={lunch:['오늘 점심,','뭐 먹지?','고민은 짧게, 한 끼는 맛있게. 오늘의 메뉴를 뽑아 봐.'],dinner:['오늘 저녁,','뭐 먹지?','하루의 끝, 맛있는 선택. 오늘 저녁은 운에 맡겨 봐.'],cafe:['잠깐 쉬어 갈까,','카페 갈래?','커피 한 잔부터 달콤한 한 입까지. 오늘의 취향을 뽑아 봐.']};

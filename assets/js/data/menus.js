@@ -1,4 +1,4 @@
-import {foods,cafes} from './catalog.js?v=0.1.8';
+import {foods,cafes} from './catalog.js?v=0.1.9';
 export const foodCategories = ['한식','중식','일식','양식','분식','동남아','패스트푸드','기타'];
 export const cafeCategories = ['커피','차·티','논커피','디저트','베이커리'];
 // 식사 태그는 편집 기준. 건강·영양 평가나 특정 시간대 섭취 제한을 뜻하지 않는다.
