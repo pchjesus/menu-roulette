@@ -12,5 +12,5 @@ export async function animateSlots(container,machine,rounds,reduced,onStop){
   const end=-(OFFSET+(winnerIndex-1)*HEIGHT);const animation=track.animate([{transform:`translateY(-${OFFSET}px)`},{transform:`translateY(${end}px)`}],{duration:1800+index*400,easing:'cubic-bezier(.12,.68,.16,1)',fill:'forwards'});
   return animation.finished.then(()=>{track.style.transform=`translateY(${end}px)`;animation.cancel();onStop(round.winner,index);container.setAttribute('aria-label',`슬롯 ${index+1}: ${round.winner.name}`);});
  });
- try{await Promise.all(promises);}finally{machine.classList.remove('is-spinning');}
+ try{await Promise.all(promises);container.setAttribute('aria-label',rounds.map(r=>r.winner.name).join(', '));}finally{machine.classList.remove('is-spinning');}
 }
