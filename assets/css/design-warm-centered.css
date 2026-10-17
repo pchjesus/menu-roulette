@@ -323,3 +323,69 @@ footer > span:last-child { font-size: 10px; }
   .slot-bubbles .slot-bubble small { font-size: 11px; }
   .slot-bubbles .slot-bubble h3 { font-size: 19px; }
 }
+
+/* EXP-02 patch 1: align the primary action to the slot panel's lower edge.
+   Keep readable labels left-aligned and the 1.3:.82 column proportion. */
+@media (min-width: 861px) {
+  .play-layout {
+    align-items: stretch;
+  }
+  .stage {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .stage > .machine-wrap {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  .settings {
+    min-height: 475px;
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    padding-bottom: 0;
+  }
+  .settings > .panel-head,
+  .settings > .catalog-open,
+  .settings > fieldset,
+  .settings > .pool-line,
+  .settings > .message,
+  .settings > .motion,
+  .settings > .spin-button {
+    flex-shrink: 0;
+  }
+  .settings > .spin-button {
+    margin-top: auto;
+  }
+}
+/* Keep the native details/summary control; animate only its content area. */
+#guide .guide-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex: none;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1;
+  transform: rotate(0deg);
+  transform-origin: center;
+  transition: transform 300ms cubic-bezier(.2,.8,.2,1);
+}
+#guide[open]:not(.guide-collapsing) .guide-toggle {
+  transform: rotate(45deg);
+}
+#guide .guide-content {
+  overflow: hidden;
+}
+#guide .guide-inner {
+  padding: 8px 0 12px;
+}
+#guide .guide-inner p:last-child {
+  margin-bottom: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  #guide .guide-toggle { transition: none; }
+}
