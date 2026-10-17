@@ -56,3 +56,10 @@
 - [Universal Visual Design v1.2](https://github.com/pchjesus/design-kkakgi/blob/main/guidelines/universal/drafts/Universal_Visual_Design_UI_UX_Guidelines_v1.2.md)
 - [Preference Atlas v0.3](https://github.com/pchjesus/design-kkakgi/blob/main/references/PREFERENCE_ATLAS_v0.3_20261016.md)
 - [MUL. 비교 회고](https://github.com/pchjesus/design-kkakgi/blob/main/cases/mul-cup/COMPARISON_AND_LESSONS.md)
+
+## 실행 미리보기 (외부 정적 프록시)
+- [현재 디자인 실험 실행 미리보기](https://raw.githack.com/pchjesus/menu-roulette/1478a868278a72011161e6ec4e222eaf5af8ccb0/index.html)
+- GitHub Pages main은 그대로 보존한다. 이 URL은 raw.githack의 **외부 공개 GitHub 파일 미리보기**이고, GitHub Pages 공식 배포가 아니다.
+- 첫 HTML 열람 시 서비스 자체의 보안 확인 화면이 나올 수 있다. 이 경우 주소를 확인한 후 계속한다.
+- 위 URL은 실험 내용이 반영된 커밋 `1478a868278a72011161e6ec4e222eaf5af8ccb0`을 고정 참조한다. 향후 변경 시 URL을 새 커밋으로 갱신해야 한다.
+- 네트워크/브라우저 실기기 동작은 아직 직접 검증하지 않았으므로, 링크 이용 가능·접근성·반응형 완전 통과를 선언하지 않는다.
