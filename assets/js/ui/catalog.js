@@ -1,5 +1,5 @@
-import {browseMenus,catalogSource,catalogCategories,groupMenus} from '../logic/browse.js?v=0.1.9';
-import {icons} from '../data/menus.js?v=0.1.9';
+import {browseMenus,catalogSource,catalogCategories,groupMenus} from '../logic/browse.js?v=1.4.0';
+import {icons} from '../data/menus.js?v=1.4.0';
 export function setupCatalog(getCurrentMode){
  const dialog=document.querySelector('#menu-catalog');const trigger=document.querySelector('#catalog-open');
  const search=dialog.querySelector('#catalog-search'),clear=dialog.querySelector('#catalog-clear'),categorySelect=dialog.querySelector('#catalog-category');

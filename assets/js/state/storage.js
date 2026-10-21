@@ -1,4 +1,4 @@
-import {defaults,sanitize} from '../logic/recommend.js?v=0.1.9';
+import {defaults,sanitize} from '../logic/recommend.js?v=1.4.0';
 export const KEY='menu-roulette.settings.v1';
 export function loadSettings(storage){try{return sanitize(JSON.parse(storage.getItem(KEY)));}catch{return defaults();}}
 export function saveSettings(storage,settings){try{storage.setItem(KEY,JSON.stringify(sanitize(settings)));return true;}catch{return false;}}
