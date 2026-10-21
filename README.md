@@ -2,11 +2,13 @@
 
 점심·저녁·카페 메뉴를 골라 주는 가벼운 슬롯머신 웹앱.
 
+> 2026-10-21: 메뉴 데이터만 개인 소장판 v1.4 기준 260개로 갱신. 공개 디자인·캐릭터·동작은 기존 v0.1.5 유지.
+
 - 실행: https://pchjesus.github.io/menu-roulette/
 - 저장소: https://github.com/pchjesus/menu-roulette
 - 추천 개수: 1~3개. 처음에는 빈칸으로 시작하고, 손잡이가 움직인 뒤 감속하며 왼쪽부터 멈춥니다. 메뉴명은 각 칸 아래 큰 말풍선에 나타납니다.
 - 완전 랜덤 또는 최대 3개 카테고리의 합집합에서 메뉴별 균등 추첨.
-- 음식 460개(점심 425 / 저녁 455), 카페 170개. 한 회차 중복 없음.
+- 대표 메뉴 데이터 v1.4: 음식 175개(점심 154 / 저녁 173), 카페 85개, 총 260개. 한 회차 중복 없음.
 - 설정만 브라우저에 저장. 로그인·서버·API·추적·외부 런타임 의존성 없음.
 - 키보드, 결과 알림, 시스템/사용자 동작 축소 지원.
 
@@ -24,7 +26,7 @@ GitHub Pages는 main 브랜치의 /(root)에서 배포합니다. 상대 경로�
 ## 구조
 
 - index.html / assets/css/styles.css / assets/css/theme.css: 기본 화면과 최종 Warm-centered 테마
-- assets/js/data/catalog.js: 630개 대표 메뉴 원본
+- assets/js/data/catalog.js: 현재 260개 대표 메뉴 카탈로그
 - assets/js/data/menus.js: 메뉴 ID·카테고리·식사 모드 구성
 - assets/js/logic/recommend.js: 후보 필터·추첨·설정 검증
 - assets/js/state/storage.js: 버전별 설정 저장·복원
