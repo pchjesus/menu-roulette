@@ -1,0 +1,45 @@
+name: Publish menu roulette (GitHub Pages)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: menu-roulette-pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+
+      - name: Prepare standalone site
+        run: |
+          test -f index.html
+          mkdir -p _site
+          cp index.html _site/index.html
+          touch _site/.nojekyll
+          grep -q '뭐먹지? + 먼작귀' _site/index.html
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: ./_site
+
+      - name: Publish site
+        id: deployment
+        uses: actions/deploy-pages@v4
